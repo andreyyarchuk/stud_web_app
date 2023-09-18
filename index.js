@@ -3,8 +3,9 @@ const path = require('path')
 // DATABASE
 // 1.Импорт модуля быза данных
 const sqlite3 = require('sqlite3').verbose();
+// sqlite3.
 
-// Функция закрытие бвзы данных
+// Функция закрытие базы данных
 // db.close((err) => {
     //     if (err) {
         //         return console.error(err.message);
@@ -29,9 +30,16 @@ app.get('/', (req, res) => {
 
 
 // post-запрос
-app.post("/", (req, res) => {
-    // вывод в консоль параметров "тела" пользователя
-    console.log(req.body);
+app.post("/", async (req, res) => {
+    // const {author, title, content, pictire} = req.body
+    // const post = await Post.create({author, title, content, pictire})    
+    db.run(`INSERT INTO data(author) VALUES(Andrey)`, ['C'], function(err){
+        if (err) {
+            return console.log(err.message);
+        }
+        console.log(`A row has been inserted with rowid ${this.lastID}`)
+    });
+
     res.status(200).json('server is working123, get request work to');
 })
 
